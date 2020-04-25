@@ -1,0 +1,140 @@
+<div [ngSwitch]="schema.Type" class="field">
+
+  <div *ngSwitchCase="TEXT_TYPE">
+    <mat-form-field>
+      <input
+        #elmRef
+        matInput
+        [(ngModel)]="element[propertyName]"
+        (ngModelChange)="onModelChange($event)"
+        [required]="schema.Required"
+        [readonly]="schema.Disabled"
+        [placeholder]="schema.Description"
+        type="text">
+
+      <mat-error *ngIf="!isValid">{{ schema.MessageValidation }}</mat-error>
+    </mat-form-field>
+
+  </div>
+
+  <div *ngSwitchCase="NUMBER_TYPE">
+
+    <mat-form-field>
+      <input
+        #elmRef
+        matInput
+        [(ngModel)]="element[propertyName]"
+        (ngModelChange)="onModelChange($event)"
+        [required]="schema.Required"
+        [readonly]="schema.Disabled"
+        [placeholder]="schema.Description"
+        type="number"
+        autocomplete="false">
+
+        <mat-error *ngIf="!isValid">{{ schema.MessageValidation }}</mat-error>
+    </mat-form-field>
+
+  </div>
+
+  <div *ngSwitchCase="CHECKBOX_TYPE">
+
+      <mat-checkbox
+        #elmRef
+        [(ngModel)]="element[propertyName]"
+        (ngModelChange)="onModelChange($event)"
+        [disabled]="schema.Disabled">
+        {{schema.Description}}
+      </mat-checkbox>
+      <mat-error *ngIf="!isValid">{{ schema.MessageValidation }}</mat-error>
+  </div>
+
+  <div *ngSwitchCase="SELECT_TYPE">
+
+    <mat-form-field>
+      <mat-select
+        #elmRef
+        [(ngModel)]="element[propertyName]"
+        (ngModelChange)="onModelChange($event)"
+        [required]="schema.Required"
+        [disabled]="schema.Disabled"
+        [placeholder]="schema.Description">
+        <mat-option *ngFor="let item of schema.Values" [value]="item.Value">
+          {{item.Description}}
+        </mat-option>
+      </mat-select>
+
+      <mat-error *ngIf="!isValid">{{ schema.MessageValidation }}</mat-error>
+    </mat-form-field>
+
+  </div>
+
+  <div *ngSwitchCase="MULTISELECT_TYPE">
+
+    <mat-form-field>
+      <mat-select
+        #elmRef
+        multiple
+        [(ngModel)]="element[propertyName]"
+        (ngModelChange)="onModelChange($event)"
+        [required]="schema.Required"
+        [disabled]="schema.Disabled"
+        [placeholder]="schema.Description">
+        <mat-option *ngFor="let item of schema.Values" [value]="item.Value">
+          {{item.Description}}
+        </mat-option>
+      </mat-select>
+
+      <mat-error *ngIf="!isValid">{{ schema.MessageValidation }}</mat-error>
+    </mat-form-field>
+
+  </div>
+
+  <div *ngSwitchCase="INPUT_MENU">
+
+    <mat-form-field>
+      <input matInput #inputName
+        [(ngModel)]="element[propertyName]"
+        [name]="element[propertyName]"
+        (ngModelChange)="onModelChange($event)"
+        [required]="schema.Required"
+        [disabled]="schema.Disabled"
+        [placeholder]="schema.Description"
+        aria-label="State"
+        [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <ng-container>
+          <mat-option *ngFor="let item of schema.Values"
+            [value]="item.Value">
+            {{item.Description}}
+          </mat-option>
+        </ng-container>
+      </mat-autocomplete>
+      <mat-error *ngIf="!isValid">{{ schema.MessageValidation }}</mat-error>
+    </mat-form-field>
+
+  </div>
+
+
+  <div *ngSwitchCase="DATE_TYPE">
+
+    <mat-form-field class="date-field">
+      <input
+        #elmRef
+        matInput
+        matDatePickerWithMask
+        [matDatepicker]="picker"
+        [(ngModel)]="element[propertyName]"
+        (ngModelChange)="onModelChange($event)"
+        [required]="schema.Required"
+        [readonly]="schema.Disabled"
+        [placeholder]="schema.Description"
+        autocomplete="false">
+
+      <mat-datepicker-toggle matSuffix [for]="picker" [disabled]="schema.Disabled"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+
+      <mat-error *ngIf="!isValid">{{ schema.MessageValidation }}</mat-error>
+    </mat-form-field>
+  </div>
+</div>
+

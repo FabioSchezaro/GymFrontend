@@ -2,3 +2,13 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+mat-card {
+  padding: 30px !important;
+}
+
+.error {
+  font-size: 10px;
+  width: 360px;
+  color: red;
+}
