@@ -1,0 +1,19 @@
+:host {
+  height: 100%;
+  width: 100%;
+  padding: 0px !important;
+  margin: 0px !important;
+}
+
+:host:hover {
+  background-color: #363636;
+}
+
+mat-icon {
+  padding-top: 20px;
+  color: yellow;
+}
+
+a {
+  height: 100%;
+}

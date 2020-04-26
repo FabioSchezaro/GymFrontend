@@ -28,6 +28,7 @@ export class InputFormComponent implements OnInit, DoCheck {
   SELECT_TYPE = PropertyType.Select;
   MULTISELECT_TYPE = PropertyType.MultiSelect;
   INPUT_MENU = PropertyType.InputMenu;
+  INPUT_PASSWORD = PropertyType.Password;
 
   //#endregion
 

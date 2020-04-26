@@ -1,3 +1,3 @@
 export class Guid {
-  Id: string;
+  id: string;
 }

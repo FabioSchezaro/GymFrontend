@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user';
 import { Validations } from 'src/app/utils/validations/validations';
 import { Validation } from 'src/app/models/shared/validation';
@@ -9,9 +8,11 @@ import { PropertyType } from 'src/app/utils/enums/property-type';
 import { SchemaFormColumn } from 'src/app/shared/schema/schema-form-column';
 import { SchemaForm } from 'src/app/shared/schema/schema-form';
 import { assingSchema } from 'src/app/shared/schema/helper/schema-helper';
-import { MatFormFieldControl } from '@angular/material/form-field';
 import { ISchemaFormButton } from 'src/app/shared/schema/schema-form-button';
-import { GuidService } from 'src/app/utils/services/guid.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,8 @@ import { GuidService } from 'src/app/utils/services/guid.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+
+  loading = false;
 
   user: User;
 
@@ -32,7 +35,15 @@ export class LoginComponent implements OnInit {
   loginButton: ISchemaFormButton;
   listButtons: Array<ISchemaFormButton> = new Array<ISchemaFormButton>();
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private authenticationService: AuthenticationService,
+    private router: Router,
+    private alertService: ToastrService
+  ) {
+    if (this.authenticationService.currentUserValue) {
+      this.router.navigate(['/']);
+    }
+  }
 
   ngOnInit() {
     this.configureButton();
@@ -60,8 +71,10 @@ export class LoginComponent implements OnInit {
   }
 
   setCommonSchemas() {
-    this.userNameColumn = new Schema('Nome', 'UserName', PropertyType.Text, [], { required: true, messageValidation: 'Informe o login' });
-    this.passwordColumn = new Schema('Senha', 'Password', PropertyType.Text, [], { required: true, messageValidation: 'Informe a senha.' });
+    this.userNameColumn = new Schema('Nome', 'userName', PropertyType.Text, [], { required: true, messageValidation: 'Informe o login' });
+    this.passwordColumn = new Schema(
+      'Senha', 'password', PropertyType.Password, [], { required: true, messageValidation: 'Informe a senha.' }
+    );
   }
 
   configureColumns() {
@@ -109,10 +122,12 @@ export class LoginComponent implements OnInit {
   Login() {
     const validation = Validations.LoginValidation(this.user);
     if (!validation) {
-      this.userService.Authenticate(this.user).subscribe(result => {
-        console.log(result);
-      }, error => {
-        console.log(error.error.message);
+      this.authenticationService.login(this.user).pipe(first()).subscribe(data => {
+        this.router.navigate(['']);
+      },
+      error => {
+        this.alertService.error(error);
+        this.loading = false;
       });
     }
   }

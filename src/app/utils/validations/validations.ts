@@ -16,9 +16,9 @@ export class Validations {
 }
 
 export function GetUserNameErrorMessage(user: User) {
-  return !user.UserName ? 'Por favor, informe o login.' : '';
+  return !user.userName ? 'Por favor, informe o login.' : '';
 }
 
 export function GetPasswordErrorMessage(user: User) {
-  return !user.Password ? 'Por favor, informe a senha.' : '';
+  return !user.password ? 'Por favor, informe a senha.' : '';
 }

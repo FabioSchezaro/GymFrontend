@@ -17,6 +17,23 @@
 
   </div>
 
+  <div *ngSwitchCase="INPUT_PASSWORD">
+    <mat-form-field>
+      <input
+        #elmRef
+        matInput
+        [(ngModel)]="element[propertyName]"
+        (ngModelChange)="onModelChange($event)"
+        [required]="schema.Required"
+        [readonly]="schema.Disabled"
+        [placeholder]="schema.Description"
+        type="password">
+
+      <mat-error *ngIf="!isValid">{{ schema.MessageValidation }}</mat-error>
+    </mat-form-field>
+
+  </div>
+
   <div *ngSwitchCase="NUMBER_TYPE">
 
     <mat-form-field>
