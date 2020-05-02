@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { BaseService } from './base.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { first } from 'rxjs/operators';
 import { People } from '../models/people';
 
 @Injectable({
@@ -22,14 +23,30 @@ export class PeopleService extends BaseService {
   }
 
   register(people: People) {
-    return this.http.post(`${environment.apiUrl}people/register`, people, this.httpOptions);
+    return this.http.post<any>(`${environment.apiUrl}people`, people, this.httpOptions).pipe(first()).subscribe(success => {
+      this.saveSuccess$.next(success);
+    },
+    error => {
+      this.saveError$.next(error);
+    });
   }
 
   update(people: People) {
-    return this.http.put(`${environment.apiUrl}people`, people, this.httpOptions);
+    return this.http.put<any>(`${environment.apiUrl}people`, people, this.httpOptions).pipe(first()).subscribe(success => {
+      this.updateSuccess$.next(success);
+    },
+    error => {
+      this.updateError$.next(error);
+    });
   }
 
-  delete(id: string) {
-    return this.http.delete(`${environment.apiUrl}people/${id}`, this.httpOptions);
+  delete(people: People) {
+    this.httpOptions.params = new HttpParams().set('id', people.id.toString());
+    return this.http.delete<any>(`${environment.apiUrl}people`, this.httpOptions).pipe(first()).subscribe(success => {
+      this.deleteSuccess$.next(success);
+    },
+    error => {
+      this.deleteError$.next(error);
+    });
   }
 }

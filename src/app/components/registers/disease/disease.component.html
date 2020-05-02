@@ -1,0 +1,27 @@
+<div class="disease">
+  <div class="form">
+    <form (submit)="SaveDisease()">
+      <app-base-form
+        [title]="'Cadastro de doença'"
+        [schemaForm]="searchForm"
+        [object]="disease">
+        <div actions *ngFor=" let button of listButtons">
+          <button mat-flat-button
+            [type]="button.Type"
+            [color]="button.Color"
+            [disabled]="button.Disabled">
+            {{ button.Description }}
+          </button>
+        </div>
+      </app-base-form>
+    </form>
+  </div>
+  <div class="grid">
+    <app-base-grid-form
+      [object]="searchDiseases"
+      [columns]="columns"
+      [title]="'Lista de doenças'"
+      (action)="GetAction($event)">
+    </app-base-grid-form>
+  </div>
+</div>

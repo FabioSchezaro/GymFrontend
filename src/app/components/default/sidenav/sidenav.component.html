@@ -1,0 +1,28 @@
+<div fxLayout="row" fxLayout.fxFlex.gt-xs="column">
+  <mat-sidenav-container class="example-container">
+    <mat-sidenav #matSideNav opened
+      class="example-sidenav"
+      [mode]="'side'"
+      [fixedInViewport]="false"
+      [fixedTopGap]="0"
+      [fixedBottomGap]="0"
+      fxHide.lt-sm>
+      <div>
+        <app-menu></app-menu>
+      </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <div layout="row" layout-wrap>
+        <div fxFlex="grow">
+          <app-toolbar [matSideNav]="matSideNav"></app-toolbar>
+        </div>
+      </div>
+      <mat-card class="default-card">
+        <router-outlet></router-outlet>
+      </mat-card>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+
+

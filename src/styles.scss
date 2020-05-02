@@ -8,6 +8,13 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+mat-card,
+mat-card-title,
+mat-card-content,
+mat-card-actions {
+  text-align: center;
+}
+
 mat-card {
   padding: 30px !important;
 }
@@ -20,4 +27,13 @@ mat-card {
 
 a {
   cursor: pointer;
+}
+
+mat-form-field {
+  width: 100%;
+  padding: 10px;
+}
+
+.grid {
+  margin-top: 30px;
 }

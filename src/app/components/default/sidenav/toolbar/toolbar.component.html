@@ -1,0 +1,46 @@
+<mat-toolbar>
+  <div fxFlex="100%" fxLayout="row">
+    <div fxFlex="60%" fxLayoutAlign="start center">
+      <button mat-icon-button
+        class="icon"
+        (click)="hideShowMenu()"
+        fxHide.lt-sm
+        fxShow.gt-xs>
+        <mat-icon class="icon">menu</mat-icon>
+      </button>
+      <button mat-icon-button
+        [mdePopoverTriggerFor]="appPopover"
+        mdePopoverTriggerOn="click"
+        #popoverTrigger="mdePopoverTrigger"
+        fxHide
+        fxShow.lt-sm>
+        <mat-icon class="icon">menu</mat-icon>
+      </button>
+      <h1>FPB Fitness</h1>
+    </div>
+    <div class="user" fxFlex="35%" fxLayoutAlign="end center">
+      <app-user></app-user>
+    </div>
+    <div class="logout" fxFlex="5%" fxLayoutAlign="center center">
+      <app-logout></app-logout>
+    </div>
+  </div>
+</mat-toolbar>
+
+<mde-popover #appPopover="mdePopover" [mdePopoverOverlapTrigger]="false" fxShow.lt-sm>
+  <mat-card style="max-width: 100%; background-color: black; margin-top: 5px;">
+    <mat-card-content>
+      <mat-nav-list>
+        <div *ngFor="let item of navItens">
+          <mat-list-item *ngFor="let children of item.childrens">
+            <button mat-icon-button>
+              <a fxLayoutAlign="center center" href="{{children.url}}">
+                <mat-icon fxFlexAlign="center center" class="icon-menu">account_circle</mat-icon>
+              </a>
+            </button>
+          </mat-list-item>
+        </div>
+      </mat-nav-list>
+    </mat-card-content>
+  </mat-card>
+</mde-popover>

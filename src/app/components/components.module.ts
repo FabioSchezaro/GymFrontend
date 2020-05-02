@@ -7,9 +7,13 @@ import { AngularMaterialModule } from '../angular-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../shared/shared.module';
-import { ToolbarComponent } from './toolbar/toolbar.component';
-import { UserComponent } from './toolbar/user/user.component';
-import { LogoutComponent } from './toolbar/logout/logout.component';
+import { SidenavComponent } from './default/sidenav/sidenav.component';
+import { ToolbarComponent } from './default/sidenav/toolbar/toolbar.component';
+import { UserComponent } from './default/sidenav/toolbar/user/user.component';
+import { LogoutComponent } from './default/sidenav/toolbar/logout/logout.component';
+import { MenuComponent } from './default/sidenav/menu/menu.component';
+import { RegistersModule } from './registers/registers.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -18,6 +22,8 @@ import { LogoutComponent } from './toolbar/logout/logout.component';
     ToolbarComponent,
     UserComponent,
     LogoutComponent,
+    SidenavComponent,
+    MenuComponent,
   ],
   imports: [
     CommonModule,
@@ -26,6 +32,9 @@ import { LogoutComponent } from './toolbar/logout/logout.component';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    SharedModule,
+    RegistersModule,
+    RouterModule,
     SharedModule
   ]
 })

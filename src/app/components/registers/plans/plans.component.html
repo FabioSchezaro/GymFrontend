@@ -1,0 +1,27 @@
+<div class="plan">
+  <div class="form">
+    <form (submit)="SavePlan()">
+      <app-base-form
+        [title]="'Cadastro de plano'"
+        [schemaForm]="searchForm"
+        [object]="plan">
+        <div actions *ngFor=" let button of listButtons">
+          <button mat-flat-button
+            [type]="button.Type"
+            [color]="button.Color"
+            [disabled]="button.Disabled">
+            {{ button.Description }}
+          </button>
+        </div>
+      </app-base-form>
+    </form>
+  </div>
+  <div class="grid">
+    <app-base-grid-form
+      [object]="searchPlans"
+      [columns]="columns"
+      [title]="'Lista de planos'"
+      (action)="GetAction($event)">
+    </app-base-grid-form>
+  </div>
+</div>

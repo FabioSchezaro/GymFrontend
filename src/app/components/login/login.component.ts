@@ -21,113 +21,52 @@ import { first } from 'rxjs/operators';
 })
 export class LoginComponent implements OnInit {
 
-  loading = false;
-
   user: User;
+  pass = 'password';
+  icon = 'visibility';
+  visible = false;
 
-  userNameColumn: Schema;
-  passwordColumn: Schema;
-
-  columns: SchemaFormColumn[] = [];
-  searchForm: SchemaForm;
-  saveForm: SchemaForm;
-
-  loginButton: ISchemaFormButton;
-  listButtons: Array<ISchemaFormButton> = new Array<ISchemaFormButton>();
+  userName: string;
+  password: string;
+  validation: string;
 
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router,
     private alertService: ToastrService
   ) {
-    if (this.authenticationService.currentUserValue) {
+    if (this.authenticationService.currentTokenValue) {
       this.router.navigate(['/']);
     }
   }
 
   ngOnInit() {
-    this.configureButton();
     this.setUserClass();
-    this.setCommonSchemas();
-    this.configureColumns();
-    this.configureSearchForm();
-    this.configureSaveForm();
   }
 
-  configureButton() {
-    this.loginButton = {
-      Description: 'Login',
-      Disabled: false,
-      Color: 'primary',
-      Click: () => {
-        this.Login();
-      }
-    };
-    this.listButtons.push(this.loginButton);
+  visibility(v: boolean) {
+    if (v) {
+      this.pass = 'text';
+      this.icon = 'visibility_off';
+    } else {
+      this.pass = 'password';
+      this.icon = 'visibility';
+    }
+    this.visible = v;
   }
 
   setUserClass() {
     this.user = new User();
   }
 
-  setCommonSchemas() {
-    this.userNameColumn = new Schema('Nome', 'userName', PropertyType.Text, [], { required: true, messageValidation: 'Informe o login' });
-    this.passwordColumn = new Schema(
-      'Senha', 'password', PropertyType.Password, [], { required: true, messageValidation: 'Informe a senha.' }
-    );
-  }
-
-  configureColumns() {
-    this.columns = [
-      new SchemaFormColumn('Código', 'Id'),
-      this.userNameColumn,
-      this.passwordColumn
-    ];
-  }
-  configureSearchForm() {
-    this.searchForm = {
-      Rows : [
-        {
-          Columns: [
-            this.userNameColumn
-          ]
-        },
-        {
-          Columns: [
-            this.passwordColumn
-          ]
-        }
-      ],
-    };
-  }
-
-  configureSaveForm() {
-
-    this.saveForm = {
-      Rows : [
-        {
-          Columns: [
-            assingSchema({Required: true}, this.userNameColumn)
-          ]
-        },
-        {
-          Columns: [
-            assingSchema({Required: true}, this.passwordColumn)
-          ]
-        }
-      ]
-    };
-  }
-
   Login() {
-    const validation = Validations.LoginValidation(this.user);
-    if (!validation) {
+    this.validation = Validations.LoginValidation(this.user);
+    if (!this.validation) {
       this.authenticationService.login(this.user).pipe(first()).subscribe(data => {
         this.router.navigate(['']);
       },
       error => {
         this.alertService.error(error);
-        this.loading = false;
       });
     }
   }

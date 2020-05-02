@@ -7,19 +7,25 @@ import { BaseFormComponent } from './base-form/base-form.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
-
+import { BaseGridFormComponent } from './base-grid-form/base-grid-form.component';
 
 @NgModule({
-  declarations: [InputFormComponent, BaseFormComponent],
+  declarations: [
+    InputFormComponent,
+    BaseFormComponent,
+    BaseGridFormComponent,
+  ],
   imports: [
     CommonModule,
     AngularMaterialModule,
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
-    FlexLayoutModule
+    FlexLayoutModule,
   ],
-  exports: [BaseFormComponent]
+  exports: [
+    BaseFormComponent,
+    BaseGridFormComponent
+  ]
 })
 export class SharedModule { }

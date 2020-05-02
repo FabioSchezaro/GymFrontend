@@ -41,6 +41,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 
+import { MdePopoverModule } from '@material-extended/mde';
+
 const material = [
     MatPaginatorModule
 ]
@@ -53,6 +55,7 @@ const material = [
         CdkTableModule,
         CdkTreeModule,
         DragDropModule,
+        MdePopoverModule,
         MatAutocompleteModule,
         MatBadgeModule,
         MatBottomSheetModule,

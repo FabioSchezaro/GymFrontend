@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { SidenavComponent } from './sidenav/sidenav.component';
 
 @Component({
   selector: 'app-default',
@@ -18,6 +19,8 @@ export class DefaultComponent implements OnInit, OnDestroy {
   currentUser: User;
   currentUserSubscription: Subscription;
   users: User[] = [];
+
+  @ViewChild('sideNav', { static: true }) sideNav: SidenavComponent;
 
   constructor(
     private authenticationService: AuthenticationService,

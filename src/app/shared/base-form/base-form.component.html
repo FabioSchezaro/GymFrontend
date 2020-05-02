@@ -1,44 +1,25 @@
-<section class="login">
-  <div fxLayout="row" fxLayout.xs="column" fxFlexFill fxLayoutAlign="center center">
-    <div fxFlex="50">
-      <div fxLayoutAlign="center center">
-        <mat-card>
-          <mat-card-header fxLayout="row">
-            <mat-card-title>
-              <ng-container *ngIf="titleIsImage; else elseBlock">
-                <img src="../../../assets/login/logo-gym.jpg">
-              </ng-container>
-              <ng-template #elseBlock>
-                {{title}}
-              </ng-template>
-            </mat-card-title>
-          </mat-card-header>
-          <mat-card-content fxLayout="column" fxLayoutAlign="center center">
-            <div class="row-form" *ngFor="let row of schemaForm.Rows">
-              <div class="column-form" *ngFor="let column of row.Columns">
-                <app-input-form
-                  [schema]="column"
-                  [object]="object">
-                </app-input-form>
-                <span *ngIf="column.AdditionalText" class="additional-text">
-                  {{ column.AdditionalText }}
-                </span>
-              </div>
-            </div>
-            <!-- <ng-content select="[rte-footer]"></ng-content> -->
-          </mat-card-content>
-          <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
-            <div class="row-form" *ngFor=" let button of listButtons">
-              <button mat-flat-button
-                (click)="button.Click()"
-                [color]="button.Color"
-                [disabled]="button.Disabled">
-                {{button.Description}}
-              </button>
-            </div>
-          </mat-card-actions>
-        </mat-card>
+<div [ngClass]="{'wrapper': wrapperContent}">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        {{ title }}
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div fxLayout="row" fxLayout.lt-sm="column" *ngFor="let row of schemaForm.Rows">
+        <div fxLayoutAlign="center center" fxFlex="auto" fxLayout="column" *ngFor="let column of row.Columns">
+          <app-input-form style="width: 100%;"
+            [schema]="column"
+            [object]="object">
+          </app-input-form>
+          <span *ngIf="column.AdditionalText" class="additional-text">
+            {{ column.AdditionalText }}
+          </span>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </mat-card-content>
+    <mat-card-actions>
+      <ng-content select="[actions]"></ng-content>
+    </mat-card-actions>
+  </mat-card>
+</div>

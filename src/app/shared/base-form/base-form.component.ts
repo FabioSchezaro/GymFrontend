@@ -14,7 +14,6 @@ export class BaseFormComponent implements OnInit {
   @Input() title: string;
   @Input() titleIsImage: boolean;
   @Input() schemaForm: SchemaForm;
-  @Input() listButtons: ISchemaFormButton[];
   @Input() object: any;
   @Input() wrapperContent = true;
 

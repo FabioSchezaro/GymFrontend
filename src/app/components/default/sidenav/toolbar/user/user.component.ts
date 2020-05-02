@@ -27,7 +27,6 @@ export class UserComponent implements OnInit {
 
     this.peopleService.getById(this.user.idPeople).subscribe(result => {
       this.people = result;
-      console.log(this.people.name);
     });
   }
 
