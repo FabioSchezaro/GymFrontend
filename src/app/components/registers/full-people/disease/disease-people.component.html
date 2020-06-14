@@ -1,0 +1,22 @@
+<app-base-form
+  [schemaForm]="searchForm"
+  [object]="disease">
+  <div actions *ngFor=" let button of listButtons">
+    <button mat-flat-button
+      [type]="button.Type"
+      [color]="button.Color"
+      [disabled]="button.Disabled"
+      (click)="button.Click()">
+      {{ button.Description }}
+    </button>
+  </div>
+</app-base-form>
+<div class="grid">
+  <app-base-grid-form
+    [object]="peopleDisease"
+    [columns]="columns"
+    [title]="'Doenças'"
+    (action)="GetAction($event)"
+    [edit]="false">
+  </app-base-grid-form>
+</div>

@@ -23,11 +23,7 @@ export class UserComponent implements OnInit {
   }
 
   GetDataUser() {
-    this.user = this.authenticationService.currentUserValue;
-
-    this.peopleService.getById(this.user.idPeople).subscribe(result => {
-      this.people = result;
-    });
+    this.people = JSON.parse(localStorage.getItem('currentPeople'));
   }
 
 }

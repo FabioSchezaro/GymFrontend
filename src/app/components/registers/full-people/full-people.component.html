@@ -1,0 +1,88 @@
+<div class="form">
+  <!-- <form (submit)="SaveFullPeople()"> -->
+  <form>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon class="icon-divider-margin">contacts</mat-icon>
+            <mat-divider class="icon-divider-margin" [vertical]="true"></mat-divider>
+            Dados pessoais
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-people #people [(people)]="fullDataPeople.people" (emitIdPeople)="LoadDataPeople($event)" (emitRole)="RoleChanged($event)"></app-people>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon class="icon-divider-margin">supervisor_account</mat-icon>
+            <mat-divider class="icon-divider-margin" [vertical]="true"></mat-divider>
+            Informações de login
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-user [(user)]="fullDataPeople.user"></app-user>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon class="icon-divider-margin">home</mat-icon>
+            <mat-divider class="icon-divider-margin" [vertical]="true"></mat-divider>
+            Endereço
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-address [(address)]="fullDataPeople.address"></app-address>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon class="icon-divider-margin">list_alt</mat-icon>
+            <mat-divider class="icon-divider-margin" [vertical]="true"></mat-divider>
+            Informações do plano
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-plan [(client)]="fullDataPeople.client"></app-plan>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon class="icon-divider-margin">fitness_center</mat-icon>
+            <mat-divider class="icon-divider-margin" [vertical]="true"></mat-divider>
+            Avaliação física
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-phisical-avaliation [(phisicalAvaliation)]="fullDataPeople.phisicalAvaliation"></app-phisical-avaliation>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon class="icon-divider-margin">straighten</mat-icon>
+            <mat-divider class="icon-divider-margin" [vertical]="true"></mat-divider>
+            Medidas
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-metrics [(metrics)]="fullDataPeople.metrics"></app-metrics>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon class="icon-divider-margin">healing</mat-icon>
+            <mat-divider class="icon-divider-margin" [vertical]="true"></mat-divider>
+            Doenças
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-disease-people (diseaseOut)="diseasesSelected($event)" [(peopleDisease)]="fullDataPeople.diseasesCollection"></app-disease-people>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <div class="form-buttons" fxLayout="row" fxLayout.lt-sm="column">
+      <div *ngFor=" let button of listButtons">
+        <button mat-flat-button class="button"
+          [type]="button.Type"
+          [color]="button.Color"
+          [disabled]="button.Disabled"
+          (click)="button.Click()">
+          {{ button.Description }}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

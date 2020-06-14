@@ -1,3 +1,5 @@
+import { SchemaIcon } from '../schema-icon';
+
 export class SchemaConfiguration {
   attributes: any;
   disabled = false;
@@ -5,4 +7,7 @@ export class SchemaConfiguration {
   mask: string;
   messageValidation: string;
   additionalText: string;
+  iconSufix: SchemaIcon;
+  isLoading: boolean;
+  showErrorMessage: boolean;
 }

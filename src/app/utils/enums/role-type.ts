@@ -1,0 +1,4 @@
+export enum RoleType {
+  employer = '973908A0-F343-4253-9A58-9C43840391AF',
+  client = '556DE1D0-05AA-40CF-A81F-FF02E3C35A76'
+}

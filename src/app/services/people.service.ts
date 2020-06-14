@@ -18,6 +18,11 @@ export class PeopleService extends BaseService {
     return this.http.get<People[]>(`${environment.apiUrl}people`, this.httpOptions);
   }
 
+  GetActivePeopleByName(name: string) {
+    this.httpOptions.params = new HttpParams().set('name', name.toString());
+    return this.http.get<People[]>(`${environment.apiUrl}people/active`, this.httpOptions);
+  }
+
   getById(id: string) {
     return this.http.get<People>(`${environment.apiUrl}people/${id}`, this.httpOptions);
   }

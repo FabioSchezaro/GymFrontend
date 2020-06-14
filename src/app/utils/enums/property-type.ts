@@ -7,5 +7,6 @@ export enum PropertyType {
   Select,
   MultiSelect,
   InputMenu,
-  Password
+  Password,
+  Mask
 }

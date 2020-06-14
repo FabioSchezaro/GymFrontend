@@ -8,12 +8,17 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BaseGridFormComponent } from './base-grid-form/base-grid-form.component';
+import { IconFormComponent } from './base-form/icon-form/icon-form.component';
+import { TextMaskModule } from 'angular2-text-mask';
+import { YesNoDialogComponent } from './dialog/yes-no-dialog/yes-no-dialog.component';
 
 @NgModule({
   declarations: [
     InputFormComponent,
     BaseFormComponent,
     BaseGridFormComponent,
+    IconFormComponent,
+    YesNoDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -22,10 +27,12 @@ import { BaseGridFormComponent } from './base-grid-form/base-grid-form.component
     MatFormFieldModule,
     MatInputModule,
     FlexLayoutModule,
+    TextMaskModule
   ],
   exports: [
     BaseFormComponent,
-    BaseGridFormComponent
+    BaseGridFormComponent,
+    YesNoDialogComponent
   ]
 })
 export class SharedModule { }

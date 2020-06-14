@@ -3,7 +3,7 @@ import { AuthGuard } from 'src/app/utils/authenticate/auth-guard';
 import { NgModule } from '@angular/core';
 import { PlansComponent } from './plans/plans.component';
 import { DiseaseComponent } from './disease/disease.component';
-import { PeopleComponent } from './people/people.component';
+import { FullPeopleComponent } from './full-people/full-people.component';
 
 const routes: Routes = [
   {
@@ -30,7 +30,7 @@ const routes: Routes = [
       },
       {
         path: 'people',
-        component: PeopleComponent,
+        component: FullPeopleComponent,
         canActivate: [AuthGuard],
         data: {
           title: 'cadastro',

@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>{{ data.title }}</h1>
+<div mat-dialog-content>
+  <div *ngIf="data.contentHeader" class="content-header" [innerHTML]="data.contentHeader"></div>
+  <div *ngIf="data.contentBody" class="content-body" [innerHTML]="data.contentBody"></div>
+  <div *ngIf="data.contentFooter" class="content-footer" [innerHTML]="data.contentFooter"></div>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onNoClick(false)">Não</button>
+  <button mat-raised-button class="btn-yes" color="primary" [mat-dialog-close]="true" cdkFocusInitial>Sim</button>
+</div>

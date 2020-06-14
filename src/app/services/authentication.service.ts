@@ -33,7 +33,9 @@ export class AuthenticationService {
     login(userLogin: User) {
       return this.http.post<any>(`${environment.apiUrl}user/authenticate`, userLogin).pipe(map(user => {
         if (user && user.token) {
+          console.log(user);
           localStorage.setItem('currentUser', JSON.stringify(user.user));
+          localStorage.setItem('currentPeople', JSON.stringify(user.people));
           localStorage.setItem('currentToken', JSON.stringify(user.token));
           this.currentUserSubject.next(user.user);
           this.currentTokenSubject.next(user.token);
@@ -46,6 +48,7 @@ export class AuthenticationService {
     logout() {
       localStorage.removeItem('currentUser');
       localStorage.removeItem('currentToken');
+      localStorage.removeItem('currentPeople');
       this.currentUserSubject.next(null);
       this.currentTokenSubject.next(null);
       window.location.reload();

@@ -12,6 +12,8 @@ export class BaseGridFormComponent implements OnInit {
   @Input() object: any[];
   @Input() columns: SchemaFormColumn[];
   @Input() title: string;
+  @Input() edit = true;
+  @Input() delete = true;
 
   @Output() action: EventEmitter<any> = new EventEmitter<any>();
 
@@ -22,6 +24,10 @@ export class BaseGridFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.GetColumns();
+  }
+
+  GetColumns() {
     this.columns.forEach(column => {
       this.displayedColumns.push(column.PropertyName);
     });

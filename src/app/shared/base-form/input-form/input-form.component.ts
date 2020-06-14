@@ -2,6 +2,7 @@ import { Component, OnInit, Input, DoCheck, ViewChild } from '@angular/core';
 import { PropertyType } from 'src/app/utils/enums/property-type';
 import { isSchemaValid, getParentObjectAndPropertyName } from '../../schema/helper/schema-helper';
 import { Schema } from '../../schema/schema';
+import { SchemaIcon } from '../../schema/schema-icon';
 
 @Component({
   selector: 'app-input-form',
@@ -19,8 +20,10 @@ export class InputFormComponent implements OnInit, DoCheck {
 
   element: any;
   propertyName: string;
+  idSelected: any;
 
   TEXT_TYPE = PropertyType.Text;
+  TEXT_TYPE_MASK = PropertyType.Mask;
   NONE_TYPE = PropertyType.None;
   NUMBER_TYPE = PropertyType.Number;
   DATE_TYPE = PropertyType.Date;
@@ -38,8 +41,17 @@ export class InputFormComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck() {
-    this.schema.ElementRef = this.elmenteRef;
+    this.SetElementRef();
     this.setElement();
+  }
+
+  SetElementRef() {
+    this.schema.ElementRef = this.elmenteRef;
+  }
+
+  GetOptionSelected(option) {
+    this.idSelected = option.id;
+    this.schema.OnValueSelected.emit(option.id);
   }
 
   setElement() {
